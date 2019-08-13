@@ -1,3 +1,9 @@
+# hide spec
+pdi/resources/Code_Task.pdf
+
+# local files
+elevate/
+
 # Compiled class file
 *.class
 
