@@ -1,0 +1,265 @@
+swagger: '2.0'
+info:
+  description: 'POI'
+  version: 1.0.0-SNAPSHOT
+  title: Swagger POI
+  contact:
+    email: henmerlin@gmail.com  
+host: localhost:8080
+# basePath: /v2
+tags:
+  - name: poi
+    description: Everything about your pois
+    externalDocs:
+      description: Find out more
+      url: 'https://github.com/henmerlin/POI/'
+schemes:  
+  - http
+paths:
+  /poi:
+    post:
+      tags:
+        - poi
+      summary: Add a new POI
+      description: ''
+      operationId: addPoi
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: poi object that needs to be added to the API
+          required: true
+          schema:
+            $ref: '#/definitions/Poi'
+      responses:
+        '405':
+          description: Invalid input
+    put:
+      tags:
+        - poi
+      summary: Update an existing POI
+      description: ''
+      operationId: updatePoi
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: POI object that needs to be added
+          required: true
+          schema:
+            $ref: '#/definitions/Poi'
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: POI not found
+        '405':
+          description: Validation exception
+  '/poi/{poiId}':
+    get:
+      tags:
+        - poi
+      summary: Find POI by ID
+      description: Returns a single POI
+      operationId: getPoiById
+      produces:
+        - application/json
+      parameters:
+        - name: poiId
+          in: path
+          description: ID of POI to return
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Poi'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: poi not found
+    delete:
+      tags:
+        - poi
+      summary: Deletes a POI
+      description: ''
+      operationId: deletePoi
+      produces:
+        - application/json
+      parameters:
+        - name: poiId
+          in: path
+          description: poi id to delete
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: POI not found
+  /asset:
+    post:
+      tags:
+        - asset
+      summary: Add a new Asset
+      description: ''
+      operationId: addAsset
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Asset object that needs to be added to the API
+          required: true
+          schema:
+            $ref: '#/definitions/Asset'
+      responses:
+        '405':
+          description: Invalid input
+    put:
+      tags:
+        - asset
+      summary: Update an existing Asset
+      description: ''
+      operationId: updateAsset
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Asset object that needs to be added
+          required: true
+          schema:
+            $ref: '#/definitions/Asset'
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Asset not found
+        '405':
+          description: Validation exception
+  '/asset/{assetId}':
+    get:
+      tags:
+        - asset
+      summary: Find Asset by ID
+      description: Returns a single Asset
+      operationId: getAssetById
+      produces:
+        - application/json
+      parameters:
+        - name: assetId
+          in: path
+          description: ID of Asset to return
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Asset'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: poi not found
+  '/asset/filter':
+    get:
+      tags:
+        - asset
+      summary: Find Asset by Filter
+      description: Returns Asset and POI Events
+      operationId: getAssetByFilter
+      produces:
+        - application/json
+      parameters:
+        - name: assetKey
+          in: path
+          description: Key of Asset
+          required: true
+          type: string
+        - name: initialDate
+          in: path
+          description: Initial POI Event Date
+          required: true
+          type: number
+          format: date
+        - name: finalDate
+          in: path
+          description: Initial POI Event Date
+          required: true
+          type: number
+          format: date
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Asset'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: poi not found
+definitions:
+  Asset:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      key:
+        type: string
+      meeetings:
+        type: array
+        items:
+          $ref: '#/definitions/InterestMeeting'
+  InterestMeeting:
+    type: object
+    properties:
+      assetId:
+        type: integer
+        format: int64
+      poiId:
+        type: integer
+        format: int64
+      meetingSeconds:
+        type: integer
+        format: int64
+  Poi:
+    type: object
+    required:
+      - name
+      - radiusMeters
+      - lat
+      - long
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      radiusMeters:
+        type: number
+      lat:
+        type: number
+        format: int64
+      long:
+        type: number
+        format: int64
+externalDocs:
+  description: GitHub Repository
+  url: 'https://github.com/henmerlin/POI/'
