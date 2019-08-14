@@ -45,6 +45,23 @@ ALTER TABLE domain.asset
     OWNER to postgres;
 
 
+CREATE TABLE domain.asset_position
+(
+    id serial NOT NULL,
+    key character varying(200) NOT NULL,
+    point point,
+    PRIMARY KEY (id),
+    UNIQUE (key)
+        INCLUDE(key)
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE domain.asset
+    OWNER to postgres;
+
+
     -- EEE MMM dd yyyy HH:mm:ss zXXX
     -- Wed Dec 12 2018 01:04:09 GMT-0200 (Hora oficial do Brasil)
 
