@@ -1,7 +1,6 @@
 {
-  "name": "angular-ngrx-material-starter",
-  "version": "8.3.0",
-  "license": "MIT",
+  "name": "poi-system",
+  "version": "1.0.0-SNAPSHOT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
@@ -12,7 +11,7 @@
     "test": "ng lint && ng test --configuration=test",
     "watch": "ng test --configuration=test --browsers ChromeHeadless --watch",
     "e2e": "ng e2e",
-    "ci": "npm run format:test && ng lint && ng test --configuration=test --browsers ChromeTravisCi --code-coverage && npm run e2e && npm run build:prod -- --deploy-url /angular-ngrx-material-starter/ --base-href /angular-ngrx-material-starter",
+    "ci": "npm run format:test && ng lint && ng test --configuration=test --browsers ChromeTravisCi --code-coverage && npm run e2e && npm run build:prod -- --deploy-url /poi/ --base-href /poi",
     "format:write": "prettier projects/**/*.{ts,json,md,scss} --write",
     "format:test": "prettier projects/**/*.{ts,json,md,scss} --list-different",
     "release": "standard-version && git push --follow-tags origin master",
