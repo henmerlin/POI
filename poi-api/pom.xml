@@ -84,22 +84,20 @@
             <version>${springfox-version}</version>
         </dependency>
         
-        <!--        <dependency>
+        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.3-1102-jdbc41</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-spatial</artifactId>
-            <version>4.3</version> compatible with Hibernate 4.3.x 
             <exclusions>
                 <exclusion>
                     <artifactId>postgresql</artifactId>
                     <groupId>postgresql</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>-->
+        </dependency>
         
         <dependency>
             <groupId>com.github.joschi.jackson</groupId>
