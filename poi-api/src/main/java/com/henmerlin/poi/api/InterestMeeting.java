@@ -3,8 +3,12 @@ package com.henmerlin.poi.api;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.henmerlin.poi.api.AssetPosition;
+import com.henmerlin.poi.api.Poi;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -13,56 +17,38 @@ import javax.validation.constraints.*;
  * InterestMeeting
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T10:24:59.622-03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T15:52:46.412-03:00")
 
 public class InterestMeeting   {
-  @JsonProperty("assetId")
-  private Long assetId = null;
-
-  @JsonProperty("poiId")
-  private Long poiId = null;
+  @JsonProperty("poi")
+  private Poi poi = null;
 
   @JsonProperty("meetingSeconds")
   private Long meetingSeconds = null;
 
-  public InterestMeeting assetId(Long assetId) {
-    this.assetId = assetId;
+  @JsonProperty("positions")
+  @Valid
+  private List<AssetPosition> positions = null;
+
+  public InterestMeeting poi(Poi poi) {
+    this.poi = poi;
     return this;
   }
 
   /**
-   * Get assetId
-   * @return assetId
+   * Get poi
+   * @return poi
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public Long getAssetId() {
-    return assetId;
+  public Poi getPoi() {
+    return poi;
   }
 
-  public void setAssetId(Long assetId) {
-    this.assetId = assetId;
-  }
-
-  public InterestMeeting poiId(Long poiId) {
-    this.poiId = poiId;
-    return this;
-  }
-
-  /**
-   * Get poiId
-   * @return poiId
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public Long getPoiId() {
-    return poiId;
-  }
-
-  public void setPoiId(Long poiId) {
-    this.poiId = poiId;
+  public void setPoi(Poi poi) {
+    this.poi = poi;
   }
 
   public InterestMeeting meetingSeconds(Long meetingSeconds) {
@@ -85,6 +71,35 @@ public class InterestMeeting   {
     this.meetingSeconds = meetingSeconds;
   }
 
+  public InterestMeeting positions(List<AssetPosition> positions) {
+    this.positions = positions;
+    return this;
+  }
+
+  public InterestMeeting addPositionsItem(AssetPosition positionsItem) {
+    if (this.positions == null) {
+      this.positions = new ArrayList<AssetPosition>();
+    }
+    this.positions.add(positionsItem);
+    return this;
+  }
+
+  /**
+   * Get positions
+   * @return positions
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public List<AssetPosition> getPositions() {
+    return positions;
+  }
+
+  public void setPositions(List<AssetPosition> positions) {
+    this.positions = positions;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -95,14 +110,14 @@ public class InterestMeeting   {
       return false;
     }
     InterestMeeting interestMeeting = (InterestMeeting) o;
-    return Objects.equals(this.assetId, interestMeeting.assetId) &&
-        Objects.equals(this.poiId, interestMeeting.poiId) &&
-        Objects.equals(this.meetingSeconds, interestMeeting.meetingSeconds);
+    return Objects.equals(this.poi, interestMeeting.poi) &&
+        Objects.equals(this.meetingSeconds, interestMeeting.meetingSeconds) &&
+        Objects.equals(this.positions, interestMeeting.positions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(assetId, poiId, meetingSeconds);
+    return Objects.hash(poi, meetingSeconds, positions);
   }
 
   @Override
@@ -110,9 +125,9 @@ public class InterestMeeting   {
     StringBuilder sb = new StringBuilder();
     sb.append("class InterestMeeting {\n");
     
-    sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
-    sb.append("    poiId: ").append(toIndentedString(poiId)).append("\n");
+    sb.append("    poi: ").append(toIndentedString(poi)).append("\n");
     sb.append("    meetingSeconds: ").append(toIndentedString(meetingSeconds)).append("\n");
+    sb.append("    positions: ").append(toIndentedString(positions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

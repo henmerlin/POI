@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T10:24:59.622-03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T15:52:46.412-03:00")
 
 @Controller
 public class PoiApiController implements PoiApi {
@@ -51,7 +51,7 @@ public class PoiApiController implements PoiApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Poi>(objectMapper.readValue("{  \"name\" : \"name\",  \"radiusMeters\" : 6.02745618307040320615897144307382404804229736328125,  \"id\" : 0,  \"lat\" : 1.46581298050294517310021547018550336360931396484375,  \"long\" : 5.962133916683182377482808078639209270477294921875}", Poi.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<Poi>(objectMapper.readValue("{  \"name\" : \"name\",  \"radiusMeters\" : 6.02745618307040320615897144307382404804229736328125,  \"id\" : 0,  \"position\" : {    \"latitude\" : 1.46581298050294517310021547018550336360931396484375,    \"longitude\" : 5.962133916683182377482808078639209270477294921875  }}", Poi.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<Poi>(HttpStatus.INTERNAL_SERVER_ERROR);

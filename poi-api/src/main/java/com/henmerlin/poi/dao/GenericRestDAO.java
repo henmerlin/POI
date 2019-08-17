@@ -6,7 +6,6 @@
 package com.henmerlin.poi.dao;
 
 import com.henmerlin.poi.util.RestOperations;
-import com.henmerlin.poi.model.AbstractEntity;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

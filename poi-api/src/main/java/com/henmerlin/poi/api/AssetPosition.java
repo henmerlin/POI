@@ -12,25 +12,28 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * Poi
+ * AssetPosition
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T15:52:46.412-03:00")
 
-public class Poi   {
+public class AssetPosition   {
   @JsonProperty("id")
   private Long id = null;
 
-  @JsonProperty("name")
-  private String name = null;
+  @JsonProperty("ignition")
+  private Boolean ignition = null;
 
-  @JsonProperty("radiusMeters")
-  private BigDecimal radiusMeters = null;
+  @JsonProperty("speed")
+  private Double speed = null;
+
+  @JsonProperty("datePosition")
+  private BigDecimal datePosition = null;
 
   @JsonProperty("position")
   private Position position = null;
 
-  public Poi id(Long id) {
+  public AssetPosition id(Long id) {
     this.id = id;
     return this;
   }
@@ -50,50 +53,68 @@ public class Poi   {
     this.id = id;
   }
 
-  public Poi name(String name) {
-    this.name = name;
+  public AssetPosition ignition(Boolean ignition) {
+    this.ignition = ignition;
     return this;
   }
 
   /**
-   * Get name
-   * @return name
+   * Get ignition
+   * @return ignition
   **/
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
+  @ApiModelProperty(value = "")
 
 
-  public String getName() {
-    return name;
+  public Boolean isIgnition() {
+    return ignition;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setIgnition(Boolean ignition) {
+    this.ignition = ignition;
   }
 
-  public Poi radiusMeters(BigDecimal radiusMeters) {
-    this.radiusMeters = radiusMeters;
+  public AssetPosition speed(Double speed) {
+    this.speed = speed;
     return this;
   }
 
   /**
-   * Get radiusMeters
-   * @return radiusMeters
+   * Get speed
+   * @return speed
   **/
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
+  @ApiModelProperty(value = "")
+
+
+  public Double getSpeed() {
+    return speed;
+  }
+
+  public void setSpeed(Double speed) {
+    this.speed = speed;
+  }
+
+  public AssetPosition datePosition(BigDecimal datePosition) {
+    this.datePosition = datePosition;
+    return this;
+  }
+
+  /**
+   * Get datePosition
+   * @return datePosition
+  **/
+  @ApiModelProperty(value = "")
 
   @Valid
 
-  public BigDecimal getRadiusMeters() {
-    return radiusMeters;
+  public BigDecimal getDatePosition() {
+    return datePosition;
   }
 
-  public void setRadiusMeters(BigDecimal radiusMeters) {
-    this.radiusMeters = radiusMeters;
+  public void setDatePosition(BigDecimal datePosition) {
+    this.datePosition = datePosition;
   }
 
-  public Poi position(Position position) {
+  public AssetPosition position(Position position) {
     this.position = position;
     return this;
   }
@@ -102,8 +123,7 @@ public class Poi   {
    * Get position
    * @return position
   **/
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
+  @ApiModelProperty(value = "")
 
   @Valid
 
@@ -124,26 +144,28 @@ public class Poi   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Poi poi = (Poi) o;
-    return Objects.equals(this.id, poi.id) &&
-        Objects.equals(this.name, poi.name) &&
-        Objects.equals(this.radiusMeters, poi.radiusMeters) &&
-        Objects.equals(this.position, poi.position);
+    AssetPosition assetPosition = (AssetPosition) o;
+    return Objects.equals(this.id, assetPosition.id) &&
+        Objects.equals(this.ignition, assetPosition.ignition) &&
+        Objects.equals(this.speed, assetPosition.speed) &&
+        Objects.equals(this.datePosition, assetPosition.datePosition) &&
+        Objects.equals(this.position, assetPosition.position);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, radiusMeters, position);
+    return Objects.hash(id, ignition, speed, datePosition, position);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Poi {\n");
+    sb.append("class AssetPosition {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    radiusMeters: ").append(toIndentedString(radiusMeters)).append("\n");
+    sb.append("    ignition: ").append(toIndentedString(ignition)).append("\n");
+    sb.append("    speed: ").append(toIndentedString(speed)).append("\n");
+    sb.append("    datePosition: ").append(toIndentedString(datePosition)).append("\n");
     sb.append("    position: ").append(toIndentedString(position)).append("\n");
     sb.append("}");
     return sb.toString();
