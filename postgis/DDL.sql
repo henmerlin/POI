@@ -2,11 +2,17 @@
 CREATE DATABASE poi
   WITH ENCODING='UTF8'
        OWNER=postgres
-       TEMPLATE=template_postgis
        CONNECTION LIMIT=-1;
 
--- SCHEMA
+\c poi;
+
 CREATE SCHEMA domain AUTHORIZATION postgres;
+
+CREATE EXTENSION postgis;
+CREATE EXTENSION fuzzystrmatch;
+CREATE EXTENSION postgis_tiger_geocoder;
+
+
 
 -- TABLES 
 
@@ -33,7 +39,7 @@ ALTER TABLE domain.poi
 
 CREATE TABLE domain.asset
 (
-    id integer NOT NULL DEFAULT nextval('domain.asset_id_seq'::regclass),
+    id serial NOT NULL,
     key character varying(200) COLLATE pg_catalog."default" NOT NULL,
     description character varying(300) COLLATE pg_catalog."default",
     CONSTRAINT asset_pkey PRIMARY KEY (id),

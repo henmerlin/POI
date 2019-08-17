@@ -1,0 +1,5 @@
+docker rm postgis -f
+
+docker build -t henmerlin/postgis .
+
+docker run --name postgis -e POSTGRES_PASSWORD=postgis -d henmerlin/postgis
