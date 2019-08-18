@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.henmerlin.poi.generic;
+package com.henmerlin.poi.asset.adapter;
 
 import java.math.BigDecimal;
 

@@ -8,6 +8,9 @@ import com.henmerlin.poi.asset.service.AssetFilter;
 import com.henmerlin.poi.asset.service.aggregate.PoiMeetingAggregate;
 import com.henmerlin.poi.asset.service.aggregate.PoiMeetingList;
 import com.henmerlin.poi.generic.dao.QueryBuilder;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.util.GeometricShapeFactory;
 import java.util.List;
 import javax.persistence.Query;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -53,33 +56,41 @@ public class AssetDAOImpl extends GenericRestDAO<AssetEntity> implements AssetDA
     protected Query createFilterQuery(AssetFilter filter) {
         final QueryBuilder builder = QueryBuilder
                 .init(em)
-                .sql("SELECT "
-                        + "	as, "
+                .sql("SELECT asset, "
                         + "	ap, "
                         + "	poi "
-                        + "	FROM domain.asset_position ap "
-                        + "	LEFT JOIN domain.poi poi ON dwithin ( "
-                        + "	geography (point(ap.longitude,ap.latitude)), "
-                        + "	geography (point(poi.longitude, poi.latitude)), poi.radius_meters) "
-                        + "     LEFT JOIN domain.asset as ON as.asset_key = ap.asset_key "
-                        + "WHERE 1=1 ");
+                        + "	FROM AssetPositionEntity ap "
+                        + "	LEFT JOIN PoiEntity poi ON within (ap.point, poi.point) "
+//                        + "	LEFT JOIN PoiEntity poi ON within (geometry(ap.point), geometry(poi.point), poi.radiusMeters) "
+                        + "     LEFT JOIN AssetEntity asset ON asset.assetKey = ap.assetKey "
+                        + "WHERE 1=1 "
+                        + "AND asset.id != NULL ");
+        
+        
 
         if (!filter.getAssetKey().isEmpty()) {
-            builder.sqlAppend("AND ap.asset_key = :asset_key ");
-            builder.paramAppend(":asset_key", filter.getAssetKey());
+            builder.sqlAppend("AND ap.assetKey = :assetKey ");
+            builder.paramAppend(":assetKey", filter.getAssetKey());
         }
         if (filter.getInitialDate() != null) {
-            builder.paramAppend(":initial_date", filter.getInitialDate());
-            builder.sqlAppend("AND ap.position_date >= :initial_date ");
+            builder.paramAppend(":initialDate", filter.getInitialDate());
+            builder.sqlAppend("AND ap.positionDate > :initialDate ");
         }
         if (filter.getFinalDate() != null) {
-            builder.paramAppend(":final_date", filter.getFinalDate());
-            builder.sqlAppend("AND ap.position_date =< :final_date ");
+            builder.paramAppend(":finalDate", filter.getFinalDate());
+            builder.sqlAppend("AND ap.positionDate < :finalDate ");
         }
 
-        builder.sqlAppend("ORDER BY ap.position_date DESC; ");
+        builder.sqlAppend("ORDER BY ap.positionDate DESC");
 
         return builder.build();
+    }
+
+    public Geometry createCircle(double x, double y, double radius) {
+        GeometricShapeFactory shapeFactory = new GeometricShapeFactory();
+        shapeFactory.setCentre(new Coordinate(x, y));
+        shapeFactory.setSize(radius * 2);
+        return shapeFactory.createCircle();
     }
 
 }

@@ -1,7 +1,5 @@
 package com.henmerlin.poi.asset.model;
 
-import com.henmerlin.poi.generic.model.AbstractEntity;
-import com.henmerlin.poi.generic.PointProvider;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
@@ -16,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Table(schema = "domain", name = "asset_position")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class AssetPositionEntity extends AbstractEntity implements PointProvider {
+public class AssetPositionEntity extends AbstractPointEntity {
 
     @NotEmpty
     @Column(name = "asset_key")
@@ -31,12 +29,6 @@ public class AssetPositionEntity extends AbstractEntity implements PointProvider
     @Column(name = "position_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date positionDate;
-
-    @Column(name = "latitude")
-    private BigDecimal latitude;
-
-    @Column(name = "longitude")
-    private BigDecimal longitude;
 
     public String getAssetKey() {
         return assetKey;
@@ -68,22 +60,6 @@ public class AssetPositionEntity extends AbstractEntity implements PointProvider
 
     public void setPositionDate(Date positionDate) {
         this.positionDate = positionDate;
-    }
-
-    public BigDecimal getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(BigDecimal latitude) {
-        this.latitude = latitude;
-    }
-
-    public BigDecimal getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(BigDecimal longitude) {
-        this.longitude = longitude;
     }
 
 }
