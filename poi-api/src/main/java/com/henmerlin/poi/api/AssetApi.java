@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T22:13:14.425-03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-18T11:55:27.435-03:00")
 
 @Api(value = "asset", description = "the asset API")
 public interface AssetApi {
@@ -42,10 +42,10 @@ public interface AssetApi {
         @ApiResponse(code = 200, message = "successful operation", response = Asset.class, responseContainer = "List"),
         @ApiResponse(code = 400, message = "Invalid ID supplied"),
         @ApiResponse(code = 404, message = "poi not found") })
-    @RequestMapping(value = "/asset/filter/",
+    @RequestMapping(value = "/asset/filter",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<Asset>> getAssetByFilter(@NotNull @ApiParam(value = "Key of Asset", required = true) @Valid @RequestParam(value = "assetKey", required = true) String assetKey,@NotNull @ApiParam(value = "Initial POI Event Date", required = true) @Valid @RequestParam(value = "initialDate", required = true) BigDecimal initialDate,@NotNull @ApiParam(value = "Initial POI Event Date", required = true) @Valid @RequestParam(value = "finalDate", required = true) BigDecimal finalDate);
+    ResponseEntity<List<Asset>> getAssetByFilter(@ApiParam(value = "Key of Asset") @Valid @RequestParam(value = "assetKey", required = false) String assetKey,@ApiParam(value = "Initial POI Event Date") @Valid @RequestParam(value = "initialDate", required = false) BigDecimal initialDate,@ApiParam(value = "Final POI Event Date") @Valid @RequestParam(value = "finalDate", required = false) BigDecimal finalDate);
 
 
     @ApiOperation(value = "Find Asset by ID", nickname = "getAssetById", notes = "Returns a single Asset", response = Asset.class, tags={ "asset", })

@@ -176,7 +176,7 @@ paths:
           description: Invalid ID supplied
         '404':
           description: poi not found
-  '/asset/filter/':
+  '/asset/filter':
     get:
       tags:
         - asset
@@ -189,18 +189,15 @@ paths:
         - name: assetKey
           in: query
           description: Key of Asset
-          required: true
           type: string
         - name: initialDate
           in: query
           description: Initial POI Event Date
-          required: true
           type: number
           format: date
         - name: finalDate
           in: query
-          description: Initial POI Event Date
-          required: true
+          description: Final POI Event Date
           type: number
           format: date
       responses:
@@ -247,8 +244,10 @@ definitions:
     type: object
     required:
       - name
-      - lat
-      - long
+      - ignition
+      - speed
+      - datePosition
+      - position
     properties:
       id:
         type: integer

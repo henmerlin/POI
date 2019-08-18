@@ -53,7 +53,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <skip>true</skip>
+                            <!--<skip>true</skip>-->
                             <skipOverwrite>true</skipOverwrite>
                             <inputSpec>${project.basedir}/src/main/resources/swagger.yml</inputSpec>
                             <ignoreFileOverride>${project.basedir}/src/main/resources/.swagger-codegen-ignore</ignoreFileOverride>

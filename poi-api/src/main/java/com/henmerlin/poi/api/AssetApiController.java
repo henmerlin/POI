@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.constraints.*;
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -46,7 +45,7 @@ public class AssetApiController implements AssetApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<List<Asset>> getAssetByFilter(@NotNull @ApiParam(value = "Key of Asset", required = true) @Valid @RequestParam(value = "assetKey", required = true) String assetKey, @NotNull @ApiParam(value = "Initial POI Event Date", required = true) @Valid @RequestParam(value = "initialDate", required = true) BigDecimal initialDate, @NotNull @ApiParam(value = "Initial POI Event Date", required = true) @Valid @RequestParam(value = "finalDate", required = true) BigDecimal finalDate) {
+    public ResponseEntity<List<Asset>> getAssetByFilter(@ApiParam(value = "Key of Asset") @Valid @RequestParam(value = "assetKey", required = false) String assetKey, @ApiParam(value = "Initial POI Event Date") @Valid @RequestParam(value = "initialDate", required = false) BigDecimal initialDate, @ApiParam(value = "Final POI Event Date") @Valid @RequestParam(value = "finalDate", required = false) BigDecimal finalDate) {
         try {
             final AssetFilter filter = new AssetFilter();
             filter.setAssetKey(assetKey);
