@@ -21,7 +21,7 @@ CREATE TABLE domain.poi
 (
     id serial,
     name character varying(300),
-    "radius_meters" double precision,
+    radius_meters double precision,
     longitude double precision,
     latitude double precision,
     PRIMARY KEY (id)
@@ -40,11 +40,11 @@ ALTER TABLE domain.poi
 CREATE TABLE domain.asset
 (
     id serial NOT NULL,
-    key character varying(200) COLLATE pg_catalog."default" NOT NULL,
-    description character varying(300) COLLATE pg_catalog."default",
+    asset_key character varying(200) NOT NULL,
+    description character varying(300),
     CONSTRAINT asset_pkey PRIMARY KEY (id),
-    CONSTRAINT asset_key_key1_key UNIQUE (key)
-        INCLUDE(key)
+    CONSTRAINT asset_key_unique_key UNIQUE (asset_key)
+        INCLUDE(asset_key)
 )
 WITH (
     OIDS = FALSE
@@ -56,7 +56,7 @@ CREATE TABLE domain.asset_position
 (
     id serial NOT NULL,
     position_date timestamp without time zone,
-    "key" character varying(200) NOT NULL,
+    asset_key character varying(200) NOT NULL,
     longitude double precision,
     latitude double precision,
     ignition boolean, 
