@@ -10,7 +10,7 @@
           routerLinkActive="active">
           {{item.label | translate}}
         </a>
-        <a mat-list-item href="https://github.com/tomastrajan/angular-ngrx-material-starter" target="_blank">
+        <a mat-list-item href="https://github.com/henmerlin/POI" target="_blank">
           Github
         </a>
       </mat-nav-list>
@@ -84,6 +84,7 @@
 
       <div class="footer">
         <div class="row">
+          <!-- 
           <div class="col-sm-12 links">
             <a href="https://www.github.com/tomastrajan" target="_blank">
               <fa-icon [icon]="['fab','github']"></fa-icon>
@@ -111,10 +112,11 @@
               <span>Slides</span>
             </a>
           </div>
+        -->
         </div>
         <div class="row">
           <div class="col-12 signature">
-            &#169; <span class="year">{{year}}</span> - Tomas Trajan
+            &#169; <span class="year">{{year}}</span> - {{ 'anms.author' | translate }}
             <br class="d-block d-sm-none">
             <a [matTooltip]="'anms.footer.changelog' | translate"
                matTooltipPosition="before"
