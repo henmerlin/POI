@@ -25,9 +25,25 @@ public class AssetDAOImpl extends GenericRestDAO<AssetEntity> implements AssetDA
     }
 
     @Override
+    public List<AssetPositionEntity> getLastPositions(String assetKey, AssetFilter filter) {
+        return QueryBuilder
+                .init(em)
+                .sql("SELECT ap FROM AssetPositionEntity ap "
+                        + "WHERE 1=1 "
+                        + "AND ap.assetKey = :assetKey "
+                        + "AND ap.positionDate BETWEEN :initialDate AND :finalDate "
+                        + "ORDER BY ap.positionDate DESC")
+                .paramAppend("assetKey", assetKey)
+                .paramAppend("initialDate", filter.getInitialDate())
+                .paramAppend("finalDate", filter.getFinalDate())
+                .build()
+                .getResultList();
+    }
+
+    @Override
     public List<PoiMeetingAggregate> getInsidePoiPositions(AssetFilter filter) {
         final List<PoiMeetingAggregate> aggregates = new PoiMeetingList();
-        final Query query = createFilterQuery(filter);
+        final Query query = createInsidePoiFilterQuery(filter);
         final List<Object[]> results = query.getResultList();
 
         // load aggregates
@@ -50,7 +66,7 @@ public class AssetDAOImpl extends GenericRestDAO<AssetEntity> implements AssetDA
      * https://postgis.net/docs/ST_Point.html
      * @return
      */
-    protected Query createFilterQuery(AssetFilter filter) {
+    protected Query createInsidePoiFilterQuery(AssetFilter filter) {
         final QueryBuilder builder = QueryBuilder
                 .init(em)
                 .sql("SELECT \n"
@@ -65,8 +81,8 @@ public class AssetDAOImpl extends GenericRestDAO<AssetEntity> implements AssetDA
                         + "WHERE 1=1\n");
 
         if (!filter.getAssetKey().isEmpty()) {
-            builder.sqlAppend("AND ap.asset_key = :asset_key ");
-            builder.paramAppend("asset_key", filter.getAssetKey());
+            builder.sqlAppend("AND ap.asset_key LIKE :asset_key ");
+            builder.paramAppend("asset_key", "%" + filter.getAssetKey() + "%");
         }
 
         if (filter.getInitialDate() != null) {

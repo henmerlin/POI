@@ -1,6 +1,7 @@
 package com.henmerlin.poi.asset.dao;
 
 import com.henmerlin.poi.asset.model.AssetEntity;
+import com.henmerlin.poi.asset.model.AssetPositionEntity;
 import com.henmerlin.poi.asset.service.AssetFilter;
 import com.henmerlin.poi.asset.service.aggregate.PoiMeetingAggregate;
 import com.henmerlin.poi.generic.RestOperations;
@@ -18,5 +19,7 @@ import org.springframework.stereotype.Repository;
 public interface AssetDAO extends RestOperations<AssetEntity> {
 
     List<PoiMeetingAggregate> getInsidePoiPositions(AssetFilter filter);
+
+    List<AssetPositionEntity> getLastPositions(String assetKey, AssetFilter filter);
 
 }

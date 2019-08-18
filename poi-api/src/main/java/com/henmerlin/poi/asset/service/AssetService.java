@@ -6,6 +6,7 @@
 package com.henmerlin.poi.asset.service;
 
 import com.henmerlin.poi.api.Asset;
+import com.henmerlin.poi.api.AssetPosition;
 import java.util.List;
 
 /**
@@ -17,5 +18,7 @@ public interface AssetService {
     Asset getAssetById(Integer id) throws Exception;
 
     List<Asset> getAssetByFilter(AssetFilter filter);
+
+    List<AssetPosition> getLastPositions(Asset asset, AssetFilter filter);
 
 }
