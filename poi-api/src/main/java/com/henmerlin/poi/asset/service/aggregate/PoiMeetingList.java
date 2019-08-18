@@ -20,7 +20,7 @@ public class PoiMeetingList extends ArrayList<PoiMeetingAggregate> {
                     .addPosition(aggregate.getLastPosition());
             return true;
         } catch (NoSuchElementException e) {
-            return this.add(aggregate);
+            return super.add(aggregate);
         }
     }
 

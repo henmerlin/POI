@@ -31,8 +31,12 @@ public abstract class GenericRestDAO<T> implements RestOperations<T> {
         this.clazz = clazz;
     }
 
+    public <T> T findById(Integer id, Class<T> clazz) {
+        return (T) em.find(clazz, id);
+    }
+
     @Override
-    public T findById(Long id) {
+    public T findById(Integer id) {
         return (T) em.find(clazz, id);
     }
 
@@ -43,7 +47,7 @@ public abstract class GenericRestDAO<T> implements RestOperations<T> {
     }
 
     @SuppressWarnings("JPQLValidation")
-    protected <T> List<T> findAll(List<Long> ids, T clazz) {
+    protected <T> List<T> findAll(List<Integer> ids, T clazz) {
         return em.createQuery("FROM " + clazz + " WHERE id IN :ids")
                 .setParameter(":ids", ids)
                 .getResultList();
@@ -65,7 +69,7 @@ public abstract class GenericRestDAO<T> implements RestOperations<T> {
     }
 
     @Override
-    public void deleteById(Long entityId) {
+    public void deleteById(Integer entityId) {
         T entity = findById(entityId);
         delete(entity);
     }

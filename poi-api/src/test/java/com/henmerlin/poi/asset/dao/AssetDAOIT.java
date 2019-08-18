@@ -5,7 +5,9 @@
  */
 package com.henmerlin.poi.asset.dao;
 
+import com.henmerlin.poi.asset.service.AssetFilter;
 import com.henmerlin.poi.asset.service.aggregate.PoiMeetingAggregate;
+import java.util.Date;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -58,7 +60,13 @@ public class AssetDAOIT {
     public void testGetInsidePoiPositions() {
         try {
             System.out.println("getInsidePoiPositions");
-            List<PoiMeetingAggregate> results = dao.getInsidePoiPositions(null);
+            AssetFilter filter = new AssetFilter();
+            filter.setAssetKey("");
+            filter.setInitialDate(new Date(1l));
+            filter.setFinalDate(new Date(10000000000l));
+            
+            
+            List<PoiMeetingAggregate> results = dao.getInsidePoiPositions(filter);
             assertEquals(null, results);
         } catch (Exception e) {
             fail("The test case is a prototype.");

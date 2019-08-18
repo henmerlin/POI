@@ -8,9 +8,6 @@ import com.henmerlin.poi.asset.service.AssetFilter;
 import com.henmerlin.poi.asset.service.aggregate.PoiMeetingAggregate;
 import com.henmerlin.poi.asset.service.aggregate.PoiMeetingList;
 import com.henmerlin.poi.generic.dao.QueryBuilder;
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.util.GeometricShapeFactory;
 import java.util.List;
 import javax.persistence.Query;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -35,9 +32,9 @@ public class AssetDAOImpl extends GenericRestDAO<AssetEntity> implements AssetDA
 
         // load aggregates
         results.stream().forEach((object) -> {
-            final AssetEntity asset = (AssetEntity) object[0];
-            final AssetPositionEntity position = (AssetPositionEntity) object[1];
-            final PoiEntity poi = (PoiEntity) object[2];
+            final AssetEntity asset = (AssetEntity) findById((Integer) object[0]);
+            final AssetPositionEntity position = findById((Integer) object[1], AssetPositionEntity.class);
+            final PoiEntity poi = findById((Integer) object[2], PoiEntity.class);
             aggregates.add(new PoiMeetingAggregate(poi, asset, position));
         });
         return aggregates;
@@ -56,41 +53,34 @@ public class AssetDAOImpl extends GenericRestDAO<AssetEntity> implements AssetDA
     protected Query createFilterQuery(AssetFilter filter) {
         final QueryBuilder builder = QueryBuilder
                 .init(em)
-                .sql("SELECT asset, "
-                        + "	ap, "
-                        + "	poi "
-                        + "	FROM AssetPositionEntity ap "
-                        + "	LEFT JOIN PoiEntity poi ON within (ap.point, poi.point) "
-//                        + "	LEFT JOIN PoiEntity poi ON within (geometry(ap.point), geometry(poi.point), poi.radiusMeters) "
-                        + "     LEFT JOIN AssetEntity asset ON asset.assetKey = ap.assetKey "
-                        + "WHERE 1=1 "
-                        + "AND asset.id != NULL ");
-        
-        
+                .sql("SELECT \n"
+                        + "asset.id as asset_id,\n"
+                        + "ap.id as position_id,\n"
+                        + "poi.id as poi_id\n"
+                        + "FROM domain.asset_position ap\n"
+                        + "JOIN domain.poi poi ON ST_DWithin (\n"
+                        + "geography (ST_Point(ap.longitude,ap.latitude)),\n"
+                        + "geography (ST_Point(poi.longitude, poi.latitude)), poi.radius_meters)\n"
+                        + "LEFT JOIN domain.asset asset ON asset.asset_key = ap.asset_key\n"
+                        + "WHERE 1=1\n");
 
         if (!filter.getAssetKey().isEmpty()) {
-            builder.sqlAppend("AND ap.assetKey = :assetKey ");
-            builder.paramAppend(":assetKey", filter.getAssetKey());
+            builder.sqlAppend("AND ap.asset_key = :asset_key ");
+            builder.paramAppend("asset_key", filter.getAssetKey());
         }
+
         if (filter.getInitialDate() != null) {
-            builder.paramAppend(":initialDate", filter.getInitialDate());
-            builder.sqlAppend("AND ap.positionDate > :initialDate ");
+            builder.paramAppend("initial_date", filter.getInitialDate());
+            builder.sqlAppend("AND ap.position_date > :initial_date ");
         }
         if (filter.getFinalDate() != null) {
-            builder.paramAppend(":finalDate", filter.getFinalDate());
-            builder.sqlAppend("AND ap.positionDate < :finalDate ");
+            builder.paramAppend("final_date", filter.getFinalDate());
+            builder.sqlAppend("AND ap.position_date < :final_date ");
         }
 
-        builder.sqlAppend("ORDER BY ap.positionDate DESC");
+        builder.sqlAppend("ORDER BY ap.position_date DESC");
 
-        return builder.build();
-    }
-
-    public Geometry createCircle(double x, double y, double radius) {
-        GeometricShapeFactory shapeFactory = new GeometricShapeFactory();
-        shapeFactory.setCentre(new Coordinate(x, y));
-        shapeFactory.setSize(radius * 2);
-        return shapeFactory.createCircle();
+        return builder.buildNative();
     }
 
 }

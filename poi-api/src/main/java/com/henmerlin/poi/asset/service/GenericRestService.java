@@ -23,7 +23,7 @@ public class GenericRestService<T> implements RestOperations<T> {
     public GenericRestDAO<T> dao;
     
     @Override
-    public T findById(Long id) {
+    public T findById(Integer id) {
         return dao.findById(id);
     }
     
@@ -48,7 +48,7 @@ public class GenericRestService<T> implements RestOperations<T> {
     }
     
     @Override
-    public void deleteById(Long entityId) {
+    public void deleteById(Integer entityId) {
         dao.deleteById(entityId);
     }
     

@@ -47,7 +47,15 @@ public class QueryBuilder {
     }
 
     public Query build() {
-        Query query = manager.createQuery(sql);
+        return build(Boolean.FALSE);
+    }
+
+    public Query buildNative() {
+        return build(Boolean.TRUE);
+    }
+
+    protected Query build(Boolean nativeQuery) {
+        Query query = nativeQuery ? manager.createNativeQuery(sql) : manager.createQuery(sql);
         applyParameters(query, parameters);
         return query;
     }

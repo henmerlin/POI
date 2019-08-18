@@ -1,7 +1,6 @@
 package com.henmerlin.poi.asset.service.aggregate;
 
 import com.henmerlin.poi.asset.model.AssetEntity;
-import com.henmerlin.poi.asset.model.AssetPositionEntity;
 import java.util.List;
 
 /**

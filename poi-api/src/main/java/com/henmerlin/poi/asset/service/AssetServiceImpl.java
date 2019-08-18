@@ -18,19 +18,19 @@ public class AssetServiceImpl implements AssetService {
     private AssetDAO dao;
 
     @Override
-    public Asset getAssetById(Long id) throws Exception {
+    public Asset getAssetById(Integer id) throws Exception {
         return AssetAdapter.adapt(dao.findById(id));
     }
 
     @Override
     public List<Asset> getAssetByFilter(AssetFilter filter) {
-        final List<Asset> assets = new ArrayList<>();
+        final List<PoiMeetingAggregate> positions = dao.getInsidePoiPositions(filter);
         final List<AssetMeetingAggregate> assetMeetings = new AssetMeetingList();
-        final List<PoiMeetingAggregate> posistions = dao.getInsidePoiPositions(filter);
-        posistions.stream().forEach((poi) -> {
+        // populate aggregates
+        positions.stream().forEach((poi) -> {
             assetMeetings.add(new AssetMeetingAggregate(poi.getAsset(), poi));
         });
-        return assets;
+        return AssetAdapter.adapt(assetMeetings);
     }
 
 }

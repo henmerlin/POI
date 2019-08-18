@@ -20,7 +20,7 @@ public class AssetMeetingList extends ArrayList<AssetMeetingAggregate> {
                     .addPois(aggregate.getLastPoi());
             return true;
         } catch (NoSuchElementException e) {
-            return this.add(aggregate);
+            return super.add(aggregate);
         }
     }
     

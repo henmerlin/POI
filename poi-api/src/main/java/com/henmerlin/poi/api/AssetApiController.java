@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class AssetApiController implements AssetApi {
     @Autowired
     private AssetService service;
 
-    @org.springframework.beans.factory.annotation.Autowired
+    @Autowired
     public AssetApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
@@ -62,7 +61,7 @@ public class AssetApiController implements AssetApi {
 
     public ResponseEntity<Asset> getAssetById(@ApiParam(value = "ID of Asset to return", required = true) @PathVariable("assetId") Long assetId) {
         try {
-            return new ResponseEntity<>(service.getAssetById(assetId), HttpStatus.OK);
+            return new ResponseEntity<>(service.getAssetById(assetId.intValue()), HttpStatus.OK);
         } catch (Exception e) {
             log.error("Couldn't serialize response for content type application/json", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

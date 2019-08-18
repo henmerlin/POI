@@ -3,6 +3,8 @@ package com.henmerlin.poi.asset.service.aggregate;
 import com.henmerlin.poi.asset.model.AssetEntity;
 import com.henmerlin.poi.asset.model.AssetPositionEntity;
 import com.henmerlin.poi.asset.model.PoiEntity;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +27,18 @@ public class PoiMeetingAggregate {
         this.poi = poi;
         this.asset = asset;
         addPosition(position);
+    }
+
+    /**
+     * Need improvements
+     *
+     * @return
+     */
+    public Long getMeetingSeconds() {
+        final Date maxPositionDate = positions.stream().max(dateComparator()).get().getPositionDate();
+        final Date minPositionDate = positions.stream().min(dateComparator()).get().getPositionDate();
+        final Long diff = maxPositionDate.getTime() - minPositionDate.getTime();
+        return diff / 1000 % 60;
     }
 
     public AssetEntity getAsset() {
@@ -67,16 +81,10 @@ public class PoiMeetingAggregate {
             return false;
         }
         final PoiMeetingAggregate other = (PoiMeetingAggregate) obj;
-        if (!Objects.equals(this.poi, other.poi)) {
-            return false;
-        }
-        if (!Objects.equals(this.asset, other.asset)) {
-            return false;
-        }
-        if (!Objects.equals(this.positions, other.positions)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.poi, other.poi);
     }
 
+    private Comparator<? super AssetPositionEntity> dateComparator() {
+        return (AssetPositionEntity o1, AssetPositionEntity o2) -> o1.getPositionDate().compareTo(o2.getPositionDate());
+    }
 }

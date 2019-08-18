@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface AssetService {
 
-    Asset getAssetById(Long id) throws Exception;
+    Asset getAssetById(Integer id) throws Exception;
 
     List<Asset> getAssetByFilter(AssetFilter filter);
 

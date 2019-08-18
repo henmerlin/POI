@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface RestOperations<T> {
 
-    T findById(final Long id);
+    T findById(final Integer id);
 
     List<T> findAll();
 
@@ -24,5 +24,5 @@ public interface RestOperations<T> {
 
     void delete(final T entity);
 
-    void deleteById(final Long entityId);
+    void deleteById(final Integer entityId);
 }
