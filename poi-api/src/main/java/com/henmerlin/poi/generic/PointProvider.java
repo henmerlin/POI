@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.henmerlin.poi.util;
+package com.henmerlin.poi.generic;
+
+import java.math.BigDecimal;
 
 /**
  *
  * @author henrique merlin
  */
-public interface ManageableItem {
-    
+public interface PointProvider {
+
+    BigDecimal getLatitude();
+
+    BigDecimal getLongitude();
 }

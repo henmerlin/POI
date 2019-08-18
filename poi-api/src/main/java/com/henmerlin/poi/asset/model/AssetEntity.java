@@ -1,5 +1,6 @@
-package com.henmerlin.poi.model;
+package com.henmerlin.poi.asset.model;
 
+import com.henmerlin.poi.generic.model.AbstractEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.henmerlin.poi.dao;
+package com.henmerlin.poi.asset.dao;
 
-import com.henmerlin.poi.PoiApiApplicationTests;
-import com.henmerlin.poi.service.aggregate.PoiAssetPositionAggregate;
+import com.henmerlin.poi.asset.service.aggregate.PoiMeetingAggregate;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,9 +15,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -26,12 +26,10 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@ContextConfiguration(classes = PoiApiApplicationTests.class)
+@AutoConfigureTestDatabase(replace = Replace.NONE)
 public class AssetDAOIT {
 
     @Autowired
-    private TestEntityManager tm;
-
     private AssetDAO dao;
 
     public AssetDAOIT() {
@@ -60,10 +58,8 @@ public class AssetDAOIT {
     public void testGetInsidePoiPositions() {
         try {
             System.out.println("getInsidePoiPositions");
-            PoiAssetPositionAggregate expResult = null;
-            dao = new AssetDAOImpl(tm.getEntityManager());
-            PoiAssetPositionAggregate result = dao.getInsidePoiPositions();
-            assertEquals(expResult, result);
+            List<PoiMeetingAggregate> results = dao.getInsidePoiPositions(null);
+            assertEquals(null, results);
         } catch (Exception e) {
             fail("The test case is a prototype.");
         }

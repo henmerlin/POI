@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.henmerlin.poi.service;
+package com.henmerlin.poi.asset.service;
 
-import com.henmerlin.poi.dao.GenericRestDAO;
-import com.henmerlin.poi.util.RestOperations;
+import com.henmerlin.poi.generic.dao.GenericRestDAO;
+import com.henmerlin.poi.generic.RestOperations;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

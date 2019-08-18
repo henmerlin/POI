@@ -1,8 +1,9 @@
 package com.henmerlin.poi.api;
 
-import com.henmerlin.poi.api.Asset;
 import java.math.BigDecimal;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.henmerlin.poi.asset.service.AssetFilter;
+import com.henmerlin.poi.asset.service.AssetService;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,17 +12,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T15:52:46.412-03:00")
+import org.springframework.beans.factory.annotation.Autowired;
+
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T22:13:14.425-03:00")
 
 @Controller
 public class AssetApiController implements AssetApi {
@@ -32,46 +33,43 @@ public class AssetApiController implements AssetApi {
 
     private final HttpServletRequest request;
 
+    @Autowired
+    private AssetService service;
+
     @org.springframework.beans.factory.annotation.Autowired
     public AssetApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
     }
 
-    public ResponseEntity<Void> addAsset(@ApiParam(value = "Asset object that needs to be added to the API" ,required=true )  @Valid @RequestBody Asset body) {
+    public ResponseEntity<Void> addAsset(@ApiParam(value = "Asset object that needs to be added to the API", required = true) @Valid @RequestBody Asset body) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<List<Asset>> getAssetByFilter(@ApiParam(value = "Key of Asset",required=true) @PathVariable("assetKey") String assetKey,@ApiParam(value = "Initial POI Event Date",required=true) @PathVariable("initialDate") BigDecimal initialDate,@ApiParam(value = "Initial POI Event Date",required=true) @PathVariable("finalDate") BigDecimal finalDate) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<List<Asset>>(objectMapper.readValue("[ {  \"meeetings\" : [ {    \"meetingSeconds\" : 5,    \"positions\" : [ {      \"datePosition\" : 5.962133916683182377482808078639209270477294921875,      \"id\" : 6,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      },      \"ignition\" : true,      \"speed\" : 1.4658129805029452    }, {      \"datePosition\" : 5.962133916683182377482808078639209270477294921875,      \"id\" : 6,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      },      \"ignition\" : true,      \"speed\" : 1.4658129805029452    } ],    \"poi\" : {      \"name\" : \"name\",      \"radiusMeters\" : 6.02745618307040320615897144307382404804229736328125,      \"id\" : 0,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      }    }  }, {    \"meetingSeconds\" : 5,    \"positions\" : [ {      \"datePosition\" : 5.962133916683182377482808078639209270477294921875,      \"id\" : 6,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      },      \"ignition\" : true,      \"speed\" : 1.4658129805029452    }, {      \"datePosition\" : 5.962133916683182377482808078639209270477294921875,      \"id\" : 6,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      },      \"ignition\" : true,      \"speed\" : 1.4658129805029452    } ],    \"poi\" : {      \"name\" : \"name\",      \"radiusMeters\" : 6.02745618307040320615897144307382404804229736328125,      \"id\" : 0,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      }    }  } ],  \"lastPositions\" : [ {    \"datePosition\" : 5.962133916683182377482808078639209270477294921875,    \"id\" : 6,    \"position\" : {      \"latitude\" : 1.46581298050294517310021547018550336360931396484375,      \"longitude\" : 5.962133916683182377482808078639209270477294921875    },    \"ignition\" : true,    \"speed\" : 1.4658129805029452  }, {    \"datePosition\" : 5.962133916683182377482808078639209270477294921875,    \"id\" : 6,    \"position\" : {      \"latitude\" : 1.46581298050294517310021547018550336360931396484375,      \"longitude\" : 5.962133916683182377482808078639209270477294921875    },    \"ignition\" : true,    \"speed\" : 1.4658129805029452  } ],  \"id\" : 0,  \"key\" : \"key\"}, {  \"meeetings\" : [ {    \"meetingSeconds\" : 5,    \"positions\" : [ {      \"datePosition\" : 5.962133916683182377482808078639209270477294921875,      \"id\" : 6,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      },      \"ignition\" : true,      \"speed\" : 1.4658129805029452    }, {      \"datePosition\" : 5.962133916683182377482808078639209270477294921875,      \"id\" : 6,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      },      \"ignition\" : true,      \"speed\" : 1.4658129805029452    } ],    \"poi\" : {      \"name\" : \"name\",      \"radiusMeters\" : 6.02745618307040320615897144307382404804229736328125,      \"id\" : 0,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      }    }  }, {    \"meetingSeconds\" : 5,    \"positions\" : [ {      \"datePosition\" : 5.962133916683182377482808078639209270477294921875,      \"id\" : 6,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      },      \"ignition\" : true,      \"speed\" : 1.4658129805029452    }, {      \"datePosition\" : 5.962133916683182377482808078639209270477294921875,      \"id\" : 6,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      },      \"ignition\" : true,      \"speed\" : 1.4658129805029452    } ],    \"poi\" : {      \"name\" : \"name\",      \"radiusMeters\" : 6.02745618307040320615897144307382404804229736328125,      \"id\" : 0,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      }    }  } ],  \"lastPositions\" : [ {    \"datePosition\" : 5.962133916683182377482808078639209270477294921875,    \"id\" : 6,    \"position\" : {      \"latitude\" : 1.46581298050294517310021547018550336360931396484375,      \"longitude\" : 5.962133916683182377482808078639209270477294921875    },    \"ignition\" : true,    \"speed\" : 1.4658129805029452  }, {    \"datePosition\" : 5.962133916683182377482808078639209270477294921875,    \"id\" : 6,    \"position\" : {      \"latitude\" : 1.46581298050294517310021547018550336360931396484375,      \"longitude\" : 5.962133916683182377482808078639209270477294921875    },    \"ignition\" : true,    \"speed\" : 1.4658129805029452  } ],  \"id\" : 0,  \"key\" : \"key\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<Asset>>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+    public ResponseEntity<List<Asset>> getAssetByFilter(@NotNull @ApiParam(value = "Key of Asset", required = true) @Valid @RequestParam(value = "assetKey", required = true) String assetKey, @NotNull @ApiParam(value = "Initial POI Event Date", required = true) @Valid @RequestParam(value = "initialDate", required = true) BigDecimal initialDate, @NotNull @ApiParam(value = "Initial POI Event Date", required = true) @Valid @RequestParam(value = "finalDate", required = true) BigDecimal finalDate) {
+        try {
+            final AssetFilter filter = new AssetFilter();
+            filter.setAssetKey(assetKey);
+            filter.setInitialDate(new Date(initialDate.longValue()));
+            filter.setFinalDate(new Date(finalDate.longValue()));
+            return new ResponseEntity(service.getAssetByFilter(filter), HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Couldn't serialize response for content type application/json", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        return new ResponseEntity<List<Asset>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Asset> getAssetById(@ApiParam(value = "ID of Asset to return",required=true) @PathVariable("assetId") Long assetId) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Asset>(objectMapper.readValue("{  \"meeetings\" : [ {    \"meetingSeconds\" : 5,    \"positions\" : [ {      \"datePosition\" : 5.962133916683182377482808078639209270477294921875,      \"id\" : 6,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      },      \"ignition\" : true,      \"speed\" : 1.4658129805029452    }, {      \"datePosition\" : 5.962133916683182377482808078639209270477294921875,      \"id\" : 6,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      },      \"ignition\" : true,      \"speed\" : 1.4658129805029452    } ],    \"poi\" : {      \"name\" : \"name\",      \"radiusMeters\" : 6.02745618307040320615897144307382404804229736328125,      \"id\" : 0,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      }    }  }, {    \"meetingSeconds\" : 5,    \"positions\" : [ {      \"datePosition\" : 5.962133916683182377482808078639209270477294921875,      \"id\" : 6,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      },      \"ignition\" : true,      \"speed\" : 1.4658129805029452    }, {      \"datePosition\" : 5.962133916683182377482808078639209270477294921875,      \"id\" : 6,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      },      \"ignition\" : true,      \"speed\" : 1.4658129805029452    } ],    \"poi\" : {      \"name\" : \"name\",      \"radiusMeters\" : 6.02745618307040320615897144307382404804229736328125,      \"id\" : 0,      \"position\" : {        \"latitude\" : 1.46581298050294517310021547018550336360931396484375,        \"longitude\" : 5.962133916683182377482808078639209270477294921875      }    }  } ],  \"lastPositions\" : [ {    \"datePosition\" : 5.962133916683182377482808078639209270477294921875,    \"id\" : 6,    \"position\" : {      \"latitude\" : 1.46581298050294517310021547018550336360931396484375,      \"longitude\" : 5.962133916683182377482808078639209270477294921875    },    \"ignition\" : true,    \"speed\" : 1.4658129805029452  }, {    \"datePosition\" : 5.962133916683182377482808078639209270477294921875,    \"id\" : 6,    \"position\" : {      \"latitude\" : 1.46581298050294517310021547018550336360931396484375,      \"longitude\" : 5.962133916683182377482808078639209270477294921875    },    \"ignition\" : true,    \"speed\" : 1.4658129805029452  } ],  \"id\" : 0,  \"key\" : \"key\"}", Asset.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Asset>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+    public ResponseEntity<Asset> getAssetById(@ApiParam(value = "ID of Asset to return", required = true) @PathVariable("assetId") Long assetId) {
+        try {
+            return new ResponseEntity<>(service.getAssetById(assetId), HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Couldn't serialize response for content type application/json", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        return new ResponseEntity<Asset>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> updateAsset(@ApiParam(value = "Asset object that needs to be added" ,required=true )  @Valid @RequestBody Asset body) {
+    public ResponseEntity<Void> updateAsset(@ApiParam(value = "Asset object that needs to be added", required = true) @Valid @RequestBody Asset body) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }

@@ -3,17 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.henmerlin.poi.service;
-
-import com.henmerlin.poi.service.aggregate.InterestMeetingAggregate;
-import java.util.List;
+package com.henmerlin.poi.generic;
 
 /**
  *
  * @author henrique merlin
  */
-public interface InterestMeetingService {
-
-    List<InterestMeetingAggregate> getMeetings();
-
+public interface ManageableItem {
+    
 }

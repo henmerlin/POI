@@ -1,4 +1,4 @@
-package com.henmerlin.poi.service;
+package com.henmerlin.poi.asset.service;
 
 import java.util.Date;
 

@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.henmerlin.poi.dao;
+package com.henmerlin.poi.generic.dao;
 
-import com.henmerlin.poi.util.RestOperations;
+import com.henmerlin.poi.generic.RestOperations;
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -21,50 +20,54 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-public class GenericRestDAO<T> implements RestOperations<T> {
+public abstract class GenericRestDAO<T> implements RestOperations<T> {
 
-    private Class<T> clazz;
+    private final Class<T> clazz;
 
     @Autowired
-    SessionFactory sessionFactory;
+    protected EntityManager em;
 
-    public void setClazz(Class< T> clazzToSet) {
-        this.clazz = clazzToSet;
+    public GenericRestDAO(Class<T> clazz) {
+        this.clazz = clazz;
     }
 
     @Override
     public T findById(Long id) {
-        return (T) getCurrentSession().get(clazz, id);
+        return (T) em.find(clazz, id);
     }
 
     @Override
+    @SuppressWarnings("JPQLValidation")
     public List findAll() {
-        return getCurrentSession().createQuery("FROM " + clazz).list();
+        return em.createQuery("FROM " + clazz).getResultList();
+    }
+
+    @SuppressWarnings("JPQLValidation")
+    protected <T> List<T> findAll(List<Long> ids, T clazz) {
+        return em.createQuery("FROM " + clazz + " WHERE id IN :ids")
+                .setParameter(":ids", ids)
+                .getResultList();
     }
 
     @Override
     public void create(T entity) {
-        getCurrentSession().saveOrUpdate(entity);
+        em.persist(entity);
     }
 
     @Override
     public T update(T entity) {
-        return (T) getCurrentSession().merge(entity);
+        return (T) em.merge(entity);
     }
 
     @Override
     public void delete(T entity) {
-        getCurrentSession().delete(entity);
+        em.remove(entity);
     }
 
     @Override
     public void deleteById(Long entityId) {
         T entity = findById(entityId);
         delete(entity);
-    }
-
-    protected Session getCurrentSession() {
-        return sessionFactory.getCurrentSession();
     }
 
 }

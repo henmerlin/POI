@@ -15,7 +15,7 @@ import javax.validation.constraints.*;
  * Poi
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T15:52:46.412-03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T22:13:14.425-03:00")
 
 public class Poi   {
   @JsonProperty("id")

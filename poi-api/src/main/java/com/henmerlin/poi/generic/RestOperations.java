@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.henmerlin.poi.util;
+package com.henmerlin.poi.generic;
 
 import java.util.List;
 

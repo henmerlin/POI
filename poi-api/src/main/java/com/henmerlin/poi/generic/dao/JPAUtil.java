@@ -1,4 +1,4 @@
-package com.henmerlin.poi.dao;
+package com.henmerlin.poi.generic.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

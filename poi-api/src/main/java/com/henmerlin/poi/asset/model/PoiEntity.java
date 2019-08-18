@@ -1,6 +1,7 @@
-package com.henmerlin.poi.model;
+package com.henmerlin.poi.asset.model;
 
-import com.henmerlin.poi.util.PointProvider;
+import com.henmerlin.poi.generic.model.AbstractEntity;
+import com.henmerlin.poi.generic.PointProvider;
 import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
