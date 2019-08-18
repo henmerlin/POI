@@ -1,8 +1,6 @@
 package com.henmerlin.poi.asset.adapter;
 
 import com.henmerlin.poi.api.Asset;
-import com.henmerlin.poi.api.InterestMeeting;
-import static com.henmerlin.poi.asset.adapter.InterestMeetingAdapter.adapt;
 import com.henmerlin.poi.asset.model.AssetEntity;
 import com.henmerlin.poi.asset.service.aggregate.AssetMeetingAggregate;
 import java.util.ArrayList;
@@ -14,11 +12,19 @@ import java.util.List;
  */
 public class AssetAdapter {
 
-    public static Asset adapt(AssetEntity entity) {
+    public static Asset adaptEntity(AssetEntity entity) {
         final Asset asset = create();
         asset.setId(entity.getId().longValue());
         asset.setKey(entity.getAssetKey());
         return asset;
+    }
+
+    public static List<Asset> adaptEntities(List<AssetEntity> entities) {
+        final List<Asset> assets = new ArrayList<>();
+        entities.stream().forEach((agg) -> {
+            assets.add(adaptEntity(agg));
+        });
+        return assets;
     }
 
     public static Asset adapt(AssetMeetingAggregate agg) {

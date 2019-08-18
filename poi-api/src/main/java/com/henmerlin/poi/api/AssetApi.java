@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-18T11:55:27.435-03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-18T15:39:54.971-03:00")
 
 @Api(value = "asset", description = "the asset API")
 public interface AssetApi {
@@ -35,6 +35,24 @@ public interface AssetApi {
         consumes = { "application/json" },
         method = RequestMethod.POST)
     ResponseEntity<Void> addAsset(@ApiParam(value = "Asset object that needs to be added to the API" ,required=true )  @Valid @RequestBody Asset body);
+
+
+    @ApiOperation(value = "Deletes a Asset", nickname = "deleteAsset", notes = "", tags={ "asset", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 400, message = "Invalid ID supplied"),
+        @ApiResponse(code = 404, message = "Asset not found") })
+    @RequestMapping(value = "/asset/{assetId}",
+        method = RequestMethod.DELETE)
+    ResponseEntity<Void> deleteAsset(@ApiParam(value = "Asset id to delete",required=true) @PathVariable("assetId") Long assetId);
+
+
+    @ApiOperation(value = "Find All Assets", nickname = "findAllAssets", notes = "Returns a all Assets", response = Asset.class, responseContainer = "List", tags={ "asset", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation", response = Asset.class, responseContainer = "List") })
+    @RequestMapping(value = "/asset",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    ResponseEntity<List<Asset>> findAllAssets();
 
 
     @ApiOperation(value = "Find Asset by Filter", nickname = "getAssetByFilter", notes = "Returns Asset and POI Events", response = Asset.class, responseContainer = "List", tags={ "asset", })
@@ -52,7 +70,7 @@ public interface AssetApi {
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "successful operation", response = Asset.class),
         @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "poi not found") })
+        @ApiResponse(code = 404, message = "Asset not found") })
     @RequestMapping(value = "/asset/{assetId}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)

@@ -5,6 +5,7 @@ import com.henmerlin.poi.api.Asset;
 import com.henmerlin.poi.api.AssetPosition;
 import com.henmerlin.poi.asset.adapter.AssetPositionAdapter;
 import com.henmerlin.poi.asset.dao.AssetDAO;
+import com.henmerlin.poi.asset.model.AssetEntity;
 import com.henmerlin.poi.asset.service.aggregate.AssetMeetingAggregate;
 import com.henmerlin.poi.asset.service.aggregate.AssetMeetingList;
 import com.henmerlin.poi.asset.service.aggregate.PoiMeetingAggregate;
@@ -13,15 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AssetServiceImpl implements AssetService {
+public class AssetServiceImpl extends GenericRestService<AssetEntity> implements AssetService {
 
     @Autowired
     private AssetDAO dao;
-
-    @Override
-    public Asset getAssetById(Integer id) throws Exception {
-        return AssetAdapter.adapt(dao.findById(id));
-    }
 
     @Override
     public List<Asset> getAssetByFilter(AssetFilter filter) {

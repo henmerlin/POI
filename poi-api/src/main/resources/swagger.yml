@@ -92,8 +92,6 @@ paths:
       summary: Deletes a POI
       description: ''
       operationId: deletePoi
-      produces:
-        - application/json
       parameters:
         - name: poiId
           in: path
@@ -151,6 +149,21 @@ paths:
           description: Asset not found
         '405':
           description: Validation exception
+    get:
+      tags:
+        - asset
+      summary: Find All Assets
+      description: Returns a all Assets
+      operationId: findAllAssets
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Asset'
   '/asset/{assetId}':
     get:
       tags:
@@ -175,7 +188,25 @@ paths:
         '400':
           description: Invalid ID supplied
         '404':
-          description: poi not found
+          description: Asset not found
+    delete:
+      tags:
+        - asset
+      summary: Deletes a Asset
+      description: ''
+      operationId: deleteAsset
+      parameters:
+        - name: assetId
+          in: path
+          description: Asset id to delete
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Asset not found
   '/asset/filter':
     get:
       tags:
@@ -236,7 +267,7 @@ definitions:
         type: array
         items: 
           $ref: '#/definitions/AssetPosition'
-      meeetings:
+      meetings:
         type: array
         items:
           $ref: '#/definitions/InterestMeeting'

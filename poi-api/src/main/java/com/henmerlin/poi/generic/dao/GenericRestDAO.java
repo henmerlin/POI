@@ -43,7 +43,7 @@ public abstract class GenericRestDAO<T> implements RestOperations<T> {
     @Override
     @SuppressWarnings("JPQLValidation")
     public List findAll() {
-        return em.createQuery("FROM " + clazz).getResultList();
+        return em.createQuery("SELECT cl FROM " + clazz.getSimpleName() + " cl").getResultList();
     }
 
     @SuppressWarnings("JPQLValidation")
