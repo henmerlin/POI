@@ -2,19 +2,14 @@
 
 ## Iniciando
 
-### Dockerfile
-
-
-## Tópicos
-
 ### Arquitetura
 
-### Containers
+#### Containers
 
+![Containers](c4model/container.png)
 
-#### DB
-
-PostGIS.
  
-### Ferramentas
+### Links
+
+- [poiAPI - Swagger](https://app.swaggerhub.com/apis/henmerlin/poiAPI/1.0.0-SNAPSHOT#/);
 

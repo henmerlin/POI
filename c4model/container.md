@@ -30,8 +30,8 @@
         {
           "type": "Container",
           "name": "Single-Page Application",
-          "description": "",
-          "technology": "JavaScript and Angular",
+          "description": "JavaScript and Angular",
+          "technology": "Nginx",
           "tags": "",
           "position": "1945,2445"
         },
