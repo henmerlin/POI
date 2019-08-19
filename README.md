@@ -1,15 +1,13 @@
 # POI Project
 
-## Iniciando
+## Arquitetura
 
-### Arquitetura
-
-#### Containers
+### Containers
 
 ![Containers](c4model/container.png)
 
  
-### Links
+## Links
 
 - [poiAPI - Swagger](https://app.swaggerhub.com/apis/henmerlin/poiAPI/1.0.0-SNAPSHOT#/);
 
