@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class AssetFilter {
 
-    private String assetKey;
+    private String assetKey = "";
 
     private Date initialDate;
 

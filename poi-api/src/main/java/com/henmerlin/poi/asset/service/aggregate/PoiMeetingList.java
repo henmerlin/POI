@@ -26,7 +26,7 @@ public class PoiMeetingList extends ArrayList<PoiMeetingAggregate> {
 
     protected Predicate<PoiMeetingAggregate> precidate(PoiMeetingAggregate tm) {
         return (PoiMeetingAggregate aggregate) -> {
-            return tm.getPoi().equals(aggregate.getPoi());
+            return tm.getPoi().equals(aggregate.getPoi()) && tm.getAsset().equals(aggregate.getAsset());
         };
     }
 

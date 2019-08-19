@@ -11,13 +11,13 @@ public class AssetMeetingAggregate {
 
     private final AssetEntity asset;
 
-    private final PoiMeetingAggregate lastPoi;
+    private PoiMeetingAggregate lastPoi;
 
     private final List<PoiMeetingAggregate> pois = new PoiMeetingList();
 
     public AssetMeetingAggregate(AssetEntity asset, PoiMeetingAggregate lastPoi) {
         this.asset = asset;
-        this.lastPoi = lastPoi;
+        addPois(lastPoi);
     }
 
     public AssetEntity getAsset() {
@@ -33,6 +33,7 @@ public class AssetMeetingAggregate {
     }
 
     public final void addPois(PoiMeetingAggregate poi) {
+        this.lastPoi = poi;
         pois.add(poi);
     }
 

@@ -42,8 +42,8 @@ public class AssetDAOImpl extends GenericRestDAO<AssetEntity> implements AssetDA
 
     @Override
     public List<PoiMeetingAggregate> getInsidePoiPositions(AssetFilter filter) {
-        final List<PoiMeetingAggregate> aggregates = new PoiMeetingList();
         final Query query = createInsidePoiFilterQuery(filter);
+        final List<PoiMeetingAggregate> aggregates = new PoiMeetingList();
         final List<Object[]> results = query.getResultList();
 
         // load aggregates
@@ -80,18 +80,18 @@ public class AssetDAOImpl extends GenericRestDAO<AssetEntity> implements AssetDA
                         + "LEFT JOIN domain.asset asset ON asset.asset_key = ap.asset_key\n"
                         + "WHERE 1=1\n");
 
-        if (!filter.getAssetKey().isEmpty()) {
+        if (filter.getAssetKey() != null && !filter.getAssetKey().isEmpty()) {
             builder.sqlAppend("AND ap.asset_key LIKE :asset_key ");
             builder.paramAppend("asset_key", "%" + filter.getAssetKey() + "%");
         }
 
         if (filter.getInitialDate() != null) {
             builder.paramAppend("initial_date", filter.getInitialDate());
-            builder.sqlAppend("AND ap.position_date > :initial_date ");
+            builder.sqlAppend("AND ap.position_date >= :initial_date ");
         }
         if (filter.getFinalDate() != null) {
             builder.paramAppend("final_date", filter.getFinalDate());
-            builder.sqlAppend("AND ap.position_date < :final_date ");
+            builder.sqlAppend("AND ap.position_date <= :final_date ");
         }
 
         builder.sqlAppend("ORDER BY ap.position_date DESC");

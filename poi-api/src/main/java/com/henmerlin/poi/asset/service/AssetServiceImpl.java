@@ -29,6 +29,7 @@ public class AssetServiceImpl extends GenericRestService<AssetEntity> implements
     public List<Asset> getAssetByFilter(AssetFilter filter) {
         final List<PoiMeetingAggregate> positions = assetDAO.getInsidePoiPositions(filter);
         final List<AssetMeetingAggregate> assetMeetings = new AssetMeetingList();
+        
         // populate aggregates
         positions.stream().forEach((poi) -> {
             assetMeetings.add(new AssetMeetingAggregate(poi.getAsset(), poi));

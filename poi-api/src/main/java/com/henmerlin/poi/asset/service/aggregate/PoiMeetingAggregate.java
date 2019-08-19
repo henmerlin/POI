@@ -35,11 +35,15 @@ public class PoiMeetingAggregate {
      * @return
      */
     public Integer getMeetingSeconds() {
-        final Date maxPositionDate = positions.stream().max(dateComparator()).get().getPositionDate();
-        final Date minPositionDate = positions.stream().min(dateComparator()).get().getPositionDate();
-        final Long diff = maxPositionDate.getTime() - minPositionDate.getTime();
-        final Long result = diff / 1000 % 60;
-        return result.intValue();
+        try {
+            final Date maxPositionDate = positions.stream().max(dateComparator()).get().getPositionDate();
+            final Date minPositionDate = positions.stream().min(dateComparator()).get().getPositionDate();
+            final Long diff = maxPositionDate.getTime() - minPositionDate.getTime();
+            final Long result = diff / 1000;
+            return result.intValue();
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     public AssetEntity getAsset() {
