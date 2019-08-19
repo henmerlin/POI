@@ -29,6 +29,9 @@ import { ExamplesEffects } from './examples.effects';
 import { UserComponent } from './simple-state-management/components/user.component';
 import { UserService } from './simple-state-management/user.service';
 import { ElementsComponent } from './elements/elements.component';
+import { AssetComponent } from './asset/components/asset.component';
+import { AssetService, PoiService } from '../../core/poi-api';
+import { PoiComponent } from './poi/components/poi.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -72,9 +75,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormComponent,
     NotificationsComponent,
     UserComponent,
-    ElementsComponent
+    ElementsComponent,
+    AssetComponent,
+    PoiComponent
   ],
-  providers: [StockMarketService, UserService]
+  providers: [StockMarketService, UserService, AssetService, PoiService]
 })
 export class ExamplesModule {
   constructor() {}

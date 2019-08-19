@@ -4,8 +4,10 @@
       <h1 rtl class="main-heading">{{ 'anms.features.title' | translate }}</h1>
     </div>
   </div>
+
   <div class="row align-items-end">
-    <div *ngFor="let feature of features" class="col-md-6 col-lg-4" [ngClass]="routeAnimationsElements">
+
+    <div *ngFor="let asset of assets" class="col-md-6 col-lg-4" [ngClass]="routeAnimationsElements">
       <mat-card>
         <mat-card-title>
           <code *ngIf="feature.version">{{feature.version}}</code>{{feature.name | translate}}

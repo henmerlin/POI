@@ -4,6 +4,7 @@ export const environment = {
   appName: 'POI',
   envName: 'PROD',
   production: true,
+  API_BASE_PATH: 'http://0.0.0.0:8080',
   test: false,
   i18nPrefix: '/angular-ngrx-material-starter',
   versions: {

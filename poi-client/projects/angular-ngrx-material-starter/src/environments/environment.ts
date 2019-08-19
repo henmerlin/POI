@@ -10,6 +10,7 @@ export const environment = {
   envName: 'DEV',
   production: false,
   test: false,
+  API_BASE_PATH: 'http://0.0.0.0:8080',
   i18nPrefix: '',
   versions: {
     app: packageJson.version,

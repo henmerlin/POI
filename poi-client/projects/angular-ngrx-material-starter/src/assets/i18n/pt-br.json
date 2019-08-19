@@ -32,8 +32,8 @@
   "anms.footer.changelog": "Mostrar changelog",
   "anms.header.github": "Project Github Repository",
   "anms.menu.about": "Sobre",
-  "anms.menu.examples": "Exemplos",
-  "anms.menu.features": "Características",
+  "anms.menu.examples": "Cadastros",
+  "anms.menu.features": "Controle da Frota",
   "anms.menu.login": "Sign in",
   "anms.menu.logout": "Logout",
   "anms.menu.settings": "Configurações",
@@ -59,6 +59,6 @@
   "anms.settings.themes.sticky-header": "",
   "anms.settings.themes.title": "Themes",
   "anms.settings.title": "Configurações",
-  "anms.title.long": "Angular Ngrx Material Início",
-  "anms.title.short": "Angular Starter"
+  "anms.title.long": "POI System",
+  "anms.title.short": "POI"
 }
