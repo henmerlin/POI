@@ -1,7 +1,9 @@
 package com.henmerlin.poi.api;
 
-import com.henmerlin.poi.api.Poi;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.henmerlin.poi.asset.adapter.PoiAdapter;
+import com.henmerlin.poi.asset.model.PoiEntity;
+import com.henmerlin.poi.asset.service.GenericRestService;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,17 +12,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.validation.constraints.*;
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T22:13:14.425-03:00")
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-19T07:09:36.022-03:00")
 
 @Controller
 public class PoiApiController implements PoiApi {
@@ -31,23 +32,40 @@ public class PoiApiController implements PoiApi {
 
     private final HttpServletRequest request;
 
-    @org.springframework.beans.factory.annotation.Autowired
+    @PersistenceContext
+    protected EntityManager entityManager;
+
+    @Autowired
+    @Qualifier("poi")
+    private GenericRestService<PoiEntity> service;
+
+    @Autowired
     public PoiApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
     }
 
-    public ResponseEntity<Void> addPoi(@ApiParam(value = "poi object that needs to be added to the API" ,required=true )  @Valid @RequestBody Poi body) {
+    public ResponseEntity<Void> addPoi(@ApiParam(value = "poi object that needs to be added to the API", required = true) @Valid @RequestBody Poi body) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> deletePoi(@ApiParam(value = "poi id to delete",required=true) @PathVariable("poiId") Long poiId) {
+    public ResponseEntity<Void> deletePoi(@ApiParam(value = "poi id to delete", required = true) @PathVariable("poiId") Long poiId) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Poi> getPoiById(@ApiParam(value = "ID of POI to return",required=true) @PathVariable("poiId") Long poiId) {
+    @Override
+    public ResponseEntity<List<Poi>> findAllPois() {
+        try {
+            return new ResponseEntity(PoiAdapter.adaptEntities(service.findAll()), HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Couldn't serialize response for content type application/json", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public ResponseEntity<Poi> getPoiById(@ApiParam(value = "ID of POI to return", required = true) @PathVariable("poiId") Long poiId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
@@ -61,7 +79,7 @@ public class PoiApiController implements PoiApi {
         return new ResponseEntity<Poi>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> updatePoi(@ApiParam(value = "POI object that needs to be added" ,required=true )  @Valid @RequestBody Poi body) {
+    public ResponseEntity<Void> updatePoi(@ApiParam(value = "POI object that needs to be added", required = true) @Valid @RequestBody Poi body) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }

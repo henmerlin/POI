@@ -14,8 +14,15 @@ public class AssetAdapter {
 
     public static Asset adaptEntity(AssetEntity entity) {
         final Asset asset = create();
-        asset.setId(entity.getId().longValue());
+        asset.setId(entity.getId());
         asset.setKey(entity.getAssetKey());
+        return asset;
+    }
+
+    public static AssetEntity toEntity(Asset entity) {
+        final AssetEntity asset = new AssetEntity();
+        asset.setId(entity.getId());
+        asset.setAssetKey(entity.getKey());
         return asset;
     }
 
@@ -29,9 +36,9 @@ public class AssetAdapter {
 
     public static Asset adapt(AssetMeetingAggregate agg) {
         final Asset asset = create();
-        asset.setId(agg.getAsset().getId().longValue());
+        asset.setId(agg.getAsset().getId());
         asset.setKey(agg.getAsset().getAssetKey());
-        asset.setMeeetings(InterestMeetingAdapter.adapt(agg.getPois()));
+        asset.setMeetings(InterestMeetingAdapter.adapt(agg.getPois()));
         return asset;
     }
 

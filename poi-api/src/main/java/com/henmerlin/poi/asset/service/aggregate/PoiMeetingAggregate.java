@@ -34,11 +34,12 @@ public class PoiMeetingAggregate {
      *
      * @return
      */
-    public Long getMeetingSeconds() {
+    public Integer getMeetingSeconds() {
         final Date maxPositionDate = positions.stream().max(dateComparator()).get().getPositionDate();
         final Date minPositionDate = positions.stream().min(dateComparator()).get().getPositionDate();
         final Long diff = maxPositionDate.getTime() - minPositionDate.getTime();
-        return diff / 1000 % 60;
+        final Long result = diff / 1000 % 60;
+        return result.intValue();
     }
 
     public AssetEntity getAsset() {

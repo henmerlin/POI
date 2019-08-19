@@ -4,11 +4,11 @@ import com.henmerlin.poi.asset.model.AssetEntity;
 import com.henmerlin.poi.asset.model.AssetPositionEntity;
 import com.henmerlin.poi.asset.service.AssetFilter;
 import com.henmerlin.poi.asset.service.aggregate.PoiMeetingAggregate;
-import com.henmerlin.poi.generic.RestOperations;
 import java.util.List;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import com.henmerlin.poi.generic.GenericDAO;
 
 /**
  *
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-public interface AssetDAO extends RestOperations<AssetEntity> {
+public interface AssetDAO extends GenericDAO<AssetEntity>{
 
     List<PoiMeetingAggregate> getInsidePoiPositions(AssetFilter filter);
 

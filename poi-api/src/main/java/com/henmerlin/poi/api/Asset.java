@@ -17,11 +17,11 @@ import javax.validation.constraints.*;
  * Asset
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T22:13:14.425-03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-19T07:09:36.022-03:00")
 
 public class Asset   {
   @JsonProperty("id")
-  private Long id = null;
+  private Integer id = null;
 
   @JsonProperty("key")
   private String key = null;
@@ -30,11 +30,11 @@ public class Asset   {
   @Valid
   private List<AssetPosition> lastPositions = null;
 
-  @JsonProperty("meeetings")
+  @JsonProperty("meetings")
   @Valid
-  private List<InterestMeeting> meeetings = null;
+  private List<InterestMeeting> meetings = null;
 
-  public Asset id(Long id) {
+  public Asset id(Integer id) {
     this.id = id;
     return this;
   }
@@ -46,11 +46,11 @@ public class Asset   {
   @ApiModelProperty(value = "")
 
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -103,33 +103,33 @@ public class Asset   {
     this.lastPositions = lastPositions;
   }
 
-  public Asset meeetings(List<InterestMeeting> meeetings) {
-    this.meeetings = meeetings;
+  public Asset meetings(List<InterestMeeting> meetings) {
+    this.meetings = meetings;
     return this;
   }
 
-  public Asset addMeeetingsItem(InterestMeeting meeetingsItem) {
-    if (this.meeetings == null) {
-      this.meeetings = new ArrayList<InterestMeeting>();
+  public Asset addMeetingsItem(InterestMeeting meetingsItem) {
+    if (this.meetings == null) {
+      this.meetings = new ArrayList<InterestMeeting>();
     }
-    this.meeetings.add(meeetingsItem);
+    this.meetings.add(meetingsItem);
     return this;
   }
 
   /**
-   * Get meeetings
-   * @return meeetings
+   * Get meetings
+   * @return meetings
   **/
   @ApiModelProperty(value = "")
 
   @Valid
 
-  public List<InterestMeeting> getMeeetings() {
-    return meeetings;
+  public List<InterestMeeting> getMeetings() {
+    return meetings;
   }
 
-  public void setMeeetings(List<InterestMeeting> meeetings) {
-    this.meeetings = meeetings;
+  public void setMeetings(List<InterestMeeting> meetings) {
+    this.meetings = meetings;
   }
 
 
@@ -145,12 +145,12 @@ public class Asset   {
     return Objects.equals(this.id, asset.id) &&
         Objects.equals(this.key, asset.key) &&
         Objects.equals(this.lastPositions, asset.lastPositions) &&
-        Objects.equals(this.meeetings, asset.meeetings);
+        Objects.equals(this.meetings, asset.meetings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, key, lastPositions, meeetings);
+    return Objects.hash(id, key, lastPositions, meetings);
   }
 
   @Override
@@ -161,7 +161,7 @@ public class Asset   {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    key: ").append(toIndentedString(key)).append("\n");
     sb.append("    lastPositions: ").append(toIndentedString(lastPositions)).append("\n");
-    sb.append("    meeetings: ").append(toIndentedString(meeetings)).append("\n");
+    sb.append("    meetings: ").append(toIndentedString(meetings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

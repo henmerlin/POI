@@ -61,6 +61,21 @@ paths:
           description: POI not found
         '405':
           description: Validation exception
+    get:
+      tags:
+        - poi
+      summary: Find All POIs
+      description: Returns a all POIs
+      operationId: findAllPois
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Poi'
   '/poi/{poiId}':
     get:
       tags:
@@ -260,7 +275,6 @@ definitions:
     properties:
       id:
         type: integer
-        format: int64
       key:
         type: string
       lastPositions:
@@ -282,7 +296,6 @@ definitions:
     properties:
       id:
         type: integer
-        format: int64
       ignition:
         type: boolean
       speed:
@@ -300,7 +313,6 @@ definitions:
         $ref: '#/definitions/Poi'
       meetingSeconds:
         type: integer
-        format: int64
       positions:
         type: array
         items: 
@@ -314,7 +326,6 @@ definitions:
     properties:
       id:
         type: integer
-        format: int64
       name:
         type: string
       radiusMeters:

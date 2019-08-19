@@ -17,14 +17,14 @@ import javax.validation.constraints.*;
  * InterestMeeting
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T22:13:14.425-03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-19T07:09:36.022-03:00")
 
 public class InterestMeeting   {
   @JsonProperty("poi")
   private Poi poi = null;
 
   @JsonProperty("meetingSeconds")
-  private Long meetingSeconds = null;
+  private Integer meetingSeconds = null;
 
   @JsonProperty("positions")
   @Valid
@@ -51,7 +51,7 @@ public class InterestMeeting   {
     this.poi = poi;
   }
 
-  public InterestMeeting meetingSeconds(Long meetingSeconds) {
+  public InterestMeeting meetingSeconds(Integer meetingSeconds) {
     this.meetingSeconds = meetingSeconds;
     return this;
   }
@@ -63,11 +63,11 @@ public class InterestMeeting   {
   @ApiModelProperty(value = "")
 
 
-  public Long getMeetingSeconds() {
+  public Integer getMeetingSeconds() {
     return meetingSeconds;
   }
 
-  public void setMeetingSeconds(Long meetingSeconds) {
+  public void setMeetingSeconds(Integer meetingSeconds) {
     this.meetingSeconds = meetingSeconds;
   }
 

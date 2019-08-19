@@ -8,7 +8,8 @@ package com.henmerlin.poi.generic;
 /**
  *
  * @author henrique merlin
+ * @param <T>
  */
-public interface ManageableItem {
-    
+public interface GenericDAO<T> extends RestOperations<T> {
+
 }

@@ -5,13 +5,14 @@
  */
 package com.henmerlin.poi.generic.dao;
 
-import com.henmerlin.poi.generic.RestOperations;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import com.henmerlin.poi.generic.GenericDAO;
 
 /**
  *
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-public abstract class GenericRestDAO<T> implements RestOperations<T> {
+public abstract class GenericRestDAO<T> implements GenericDAO<T> {
 
     private final Class<T> clazz;
 
@@ -54,21 +55,25 @@ public abstract class GenericRestDAO<T> implements RestOperations<T> {
     }
 
     @Override
+    @Transactional
     public void create(T entity) {
         em.persist(entity);
     }
 
     @Override
+    @Transactional
     public T update(T entity) {
         return (T) em.merge(entity);
     }
 
     @Override
+    @Transactional
     public void delete(T entity) {
-        em.remove(entity);
+        em.remove(update(entity));
     }
 
     @Override
+    @Transactional
     public void deleteById(Integer entityId) {
         T entity = findById(entityId);
         delete(entity);

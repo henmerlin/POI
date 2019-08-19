@@ -15,11 +15,11 @@ import javax.validation.constraints.*;
  * Poi
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T22:13:14.425-03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-19T07:09:36.022-03:00")
 
 public class Poi   {
   @JsonProperty("id")
-  private Long id = null;
+  private Integer id = null;
 
   @JsonProperty("name")
   private String name = null;
@@ -30,7 +30,7 @@ public class Poi   {
   @JsonProperty("position")
   private Position position = null;
 
-  public Poi id(Long id) {
+  public Poi id(Integer id) {
     this.id = id;
     return this;
   }
@@ -42,11 +42,11 @@ public class Poi   {
   @ApiModelProperty(value = "")
 
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

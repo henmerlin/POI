@@ -15,11 +15,11 @@ import javax.validation.constraints.*;
  * AssetPosition
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T22:13:14.425-03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-19T07:09:36.022-03:00")
 
 public class AssetPosition   {
   @JsonProperty("id")
-  private Long id = null;
+  private Integer id = null;
 
   @JsonProperty("ignition")
   private Boolean ignition = null;
@@ -33,7 +33,7 @@ public class AssetPosition   {
   @JsonProperty("position")
   private Position position = null;
 
-  public AssetPosition id(Long id) {
+  public AssetPosition id(Integer id) {
     this.id = id;
     return this;
   }
@@ -45,11 +45,11 @@ public class AssetPosition   {
   @ApiModelProperty(value = "")
 
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -62,7 +62,8 @@ public class AssetPosition   {
    * Get ignition
    * @return ignition
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
 
 
   public Boolean isIgnition() {
@@ -82,7 +83,8 @@ public class AssetPosition   {
    * Get speed
    * @return speed
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
 
 
   public Double getSpeed() {
@@ -102,7 +104,8 @@ public class AssetPosition   {
    * Get datePosition
    * @return datePosition
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
 
   @Valid
 
@@ -123,7 +126,8 @@ public class AssetPosition   {
    * Get position
    * @return position
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
 
   @Valid
 

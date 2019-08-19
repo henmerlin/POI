@@ -11,17 +11,23 @@ import com.henmerlin.poi.asset.service.aggregate.AssetMeetingList;
 import com.henmerlin.poi.asset.service.aggregate.PoiMeetingAggregate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
+@Qualifier("asset")
 public class AssetServiceImpl extends GenericRestService<AssetEntity> implements AssetService {
 
-    @Autowired
-    private AssetDAO dao;
+    private final AssetDAO assetDAO;
+
+    public AssetServiceImpl(@Autowired @Qualifier("asset") AssetDAO dao) {
+        super(dao);
+        this.assetDAO = (AssetDAO) dao;
+    }
 
     @Override
     public List<Asset> getAssetByFilter(AssetFilter filter) {
-        final List<PoiMeetingAggregate> positions = dao.getInsidePoiPositions(filter);
+        final List<PoiMeetingAggregate> positions = assetDAO.getInsidePoiPositions(filter);
         final List<AssetMeetingAggregate> assetMeetings = new AssetMeetingList();
         // populate aggregates
         positions.stream().forEach((poi) -> {
@@ -38,7 +44,7 @@ public class AssetServiceImpl extends GenericRestService<AssetEntity> implements
 
     @Override
     public List<AssetPosition> getLastPositions(Asset asset, AssetFilter filter) {
-        return AssetPositionAdapter.adapt(dao.getLastPositions(asset.getKey(), filter));
+        return AssetPositionAdapter.adapt(assetDAO.getLastPositions(asset.getKey(), filter));
     }
 
 }

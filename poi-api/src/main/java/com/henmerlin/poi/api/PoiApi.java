@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-17T22:13:14.425-03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-08-19T07:09:36.022-03:00")
 
 @Api(value = "poi", description = "the poi API")
 public interface PoiApi {
@@ -41,9 +41,17 @@ public interface PoiApi {
         @ApiResponse(code = 400, message = "Invalid ID supplied"),
         @ApiResponse(code = 404, message = "POI not found") })
     @RequestMapping(value = "/poi/{poiId}",
-        produces = { "application/json" }, 
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deletePoi(@ApiParam(value = "poi id to delete",required=true) @PathVariable("poiId") Long poiId);
+
+
+    @ApiOperation(value = "Find All POIs", nickname = "findAllPois", notes = "Returns a all POIs", response = Poi.class, responseContainer = "List", tags={ "poi", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation", response = Poi.class, responseContainer = "List") })
+    @RequestMapping(value = "/poi",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    ResponseEntity<List<Poi>> findAllPois();
 
 
     @ApiOperation(value = "Find POI by ID", nickname = "getPoiById", notes = "Returns a single POI", response = Poi.class, tags={ "poi", })

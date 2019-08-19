@@ -10,14 +10,14 @@ import com.henmerlin.poi.asset.service.aggregate.PoiMeetingList;
 import com.henmerlin.poi.generic.dao.QueryBuilder;
 import java.util.List;
 import javax.persistence.Query;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-@Primary
+@Qualifier("asset")
 public class AssetDAOImpl extends GenericRestDAO<AssetEntity> implements AssetDAO {
 
     public AssetDAOImpl() {
