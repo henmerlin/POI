@@ -33,10 +33,10 @@ export class AppComponent implements OnInit {
   version = env.versions.app;
   year = new Date().getFullYear();
   logo = require('../../assets/logo.png');
-  languages = ['en', 'pt-br'];
+  languages = ['pt-br'];
   navigation = [
     // { link: 'about', label: 'anms.menu.about' },
-    { link: 'feature-list', label: 'anms.menu.features' },
+    { link: 'feature-list', label: 'anms.menu.features'},
     { link: 'examples', label: 'anms.menu.examples' }
   ];
   navigationSideMenu = [

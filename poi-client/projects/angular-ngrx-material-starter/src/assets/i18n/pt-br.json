@@ -1,4 +1,5 @@
 {
+  "anms.author": "Henrique Merlin",
   "anms.about.change-theme": "Mudar Tema",
   "anms.about.check-blogs": "ou estude nos blogs abaixo",
   "anms.about.contributors.description1": "Quer começar a contribuir para o código aberto com o Angular?",
@@ -27,13 +28,14 @@
   "anms.features.rxjs": "Programação reativa com coleções assíncronas usando Observables",
   "anms.features.themes.description": "Temas flexíveis que são suportados port provided e custom components",
   "anms.features.themes.title": "Temas",
-  "anms.features.title": "Características",
+  "anms.features.title": "Controle da Frota",
   "anms.features.typescript": "Experiência de desenvolvimento superior, facilita o auto complete, a refatoração e causa menos bugs",
   "anms.footer.changelog": "Mostrar changelog",
   "anms.header.github": "Project Github Repository",
   "anms.menu.about": "Sobre",
   "anms.menu.examples": "Cadastros",
   "anms.menu.features": "Controle da Frota",
+  "anms.menu.features.poi": "Pontos de Interesse",
   "anms.menu.login": "Sign in",
   "anms.menu.logout": "Logout",
   "anms.menu.settings": "Configurações",
@@ -60,5 +62,12 @@
   "anms.settings.themes.title": "Themes",
   "anms.settings.title": "Configurações",
   "anms.title.long": "POI System",
-  "anms.title.short": "POI"
+  "anms.title.short": "POI System",
+  "anms.asset.key": "Placa",
+  "anms.asset.asset.detail": "Detalhes do Veículo",
+  "anms.asset.asset": "Veículo",
+  "anms.asset.asset.meeting.seconds": "Permanência",
+  "anms.asset.initial.date": "Data Inicial",
+  "anms.asset.final.date": "Data Final",
+  "anms.examples.poi.name": "Nome"
 }

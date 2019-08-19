@@ -149,5 +149,7 @@
   "anms.examples.poi.name": "Name",
   "anms.examples.poi.surname": "Surname",
   "anms.examples.poi.validator.required": "Please provide value",
-  "anms.examples.poi.validator.minlength": "Please provide at least {{minlength}} characters"
+  "anms.examples.poi.validator.minlength": "Please provide at least {{minlength}} characters",
+  "anms.poi.radius": "Raio (metros) ",
+  "anms.poi.meeting.seconds": "Tempo de Permanência"
 }

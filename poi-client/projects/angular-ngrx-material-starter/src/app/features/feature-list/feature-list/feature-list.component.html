@@ -3,30 +3,77 @@
     <div class="col-md-12">
       <h1 rtl class="main-heading">{{ 'anms.features.title' | translate }}</h1>
     </div>
-  </div>
 
+    <div class="col-md-12">
+      <div class="example-container">
+        <form (keydown)="load()">
+          <mat-form-field>
+            <input matInput [placeholder]="'anms.asset.key' | translate" [formControl]="searchKey">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker1" [placeholder]="'anms.asset.initial.date' | translate"
+              [formControl]="initialDate">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker2" [placeholder]="'anms.asset.final.date' | translate"
+              [formControl]="finalDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
   <div class="row align-items-end">
 
-    <div *ngFor="let asset of assets" class="col-md-6 col-lg-4" [ngClass]="routeAnimationsElements">
-      <mat-card>
-        <mat-card-title>
-          <code *ngIf="feature.version">{{feature.version}}</code>{{feature.name | translate}}
-        </mat-card-title>
-        <mat-card-subtitle rtl>
-          {{ feature.description | translate }}
-        </mat-card-subtitle>
-        <mat-card-actions>
-          <a *ngIf="feature.github" mat-icon-button [href]="feature.github" target="_blank">
-            <fa-icon [icon]="['fab','github']"></fa-icon>
-          </a>
-          <a mat-button [href]="feature.documentation" target="_blank">
-            <fa-icon icon="book"></fa-icon>{{ 'anms.features.documentation' | translate }}
-          </a>
-          <a *ngIf="feature.medium" mat-button [href]="feature.medium" target="_blank">
-            <fa-icon [icon]="['fab','medium-m']"></fa-icon>{{ 'anms.features.guide' | translate }}
-          </a>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+    <table mat-table [dataSource]="assets" multiTemplateDataRows class="mat-elevation-z8">
+
+      <ng-container matColumnDef="key">
+        <th mat-header-cell *matHeaderCellDef> {{ 'anms.asset.asset' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+          <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <div class="example-element-description">
+              <div class="row">
+
+              <mat-card class="example-card"  *ngFor="let meeting of element.meetings">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image">
+                    <img mat-card-avatar src="https://source.unsplash.com/200x200/?{{ element.name }}" />
+                  </div>
+                  <mat-card-title> {{meeting.poi.name}}</mat-card-title>
+                  <mat-card-subtitle></mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <div><strong>{{ 'anms.asset.asset.meeting.seconds' | translate}}: </strong>{{ meeting.meetingSeconds | minuteSeconds }}.</div>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button>LIKE</button>
+                  <button mat-button>SHARE</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+
+            </div>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
   </div>
 </div>

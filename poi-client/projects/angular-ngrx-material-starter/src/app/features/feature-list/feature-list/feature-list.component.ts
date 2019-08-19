@@ -1,11 +1,10 @@
-import { filter } from 'rxjs/operators';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Pipe, PipeTransform } from '@angular/core';
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
 
-import { Feature, features } from '../feature-list.data';
 import { Asset, AssetService } from '../../../core/poi-api';
 import { trigger, state, transition, style, animate } from '@angular/animations';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'anms-feature-list',
@@ -21,9 +20,11 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
 })
 export class FeatureListComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  features: Feature[] = features;
   assets: Asset[];
-  columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
+  searchKey = new FormControl();
+  initialDate = new FormControl(new Date(0));
+  finalDate  = new FormControl(new Date());
+  columnsToDisplay = ['key'];
   expandedElement: Asset | null;
 
   constructor(
@@ -40,10 +41,12 @@ export class FeatureListComponent implements OnInit {
 
   load() {
     console.log('Loading');
-    this.service.getAssetByFilter().subscribe(res => {
+   // const filter;
+    this.service.getAssetByFilter(this.searchKey.value, this.initialDate.value.getTime(), this.finalDate.value.getTime()).subscribe(res => {
       this.assets = res;
       this.cdr.detectChanges();
     })
   }
 
 }
+

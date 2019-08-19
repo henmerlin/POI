@@ -36,9 +36,7 @@
               <mat-form-field>
                 <input
                   matInput
-                  [placeholder]="
-                    'anms.examples.poi.key' | translate
-                  "
+                  [placeholder]="'anms.examples.poi.name' | translate"
                   formControlName="name"
                 />
                 <mat-error *ngIf="form.get('name').hasError('minlength')">
@@ -48,6 +46,14 @@
                   {{'anms.examples.poi.validator.required' | translate}}
                 </mat-error>
               </mat-form-field>
+
+              <h3>{{'anms.poi.radius' | translate }}</h3>
+              <mat-slider 
+              formControlName="radiusMeters" 
+                thumbLabel
+                min="1" max="1000" step="1" 
+              [displayWith]="formatLabel"></mat-slider>
+ 
               <div>
                 <button *ngIf="!isEdit.value" type="submit" mat-raised-button color="primary">
                   {{'anms.examples.poi.form.add.submit' | translate}}

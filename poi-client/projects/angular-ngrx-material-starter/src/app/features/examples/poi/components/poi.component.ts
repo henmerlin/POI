@@ -34,7 +34,8 @@ export class PoiComponent implements OnInit {
     this.load();
     this.form = this.fb.group({
       id: '',
-      name: ['', [Validators.required, Validators.minLength(5)]]
+      name: ['', [Validators.required, Validators.minLength(5)]],
+      radiusMeters: ['', [Validators.required, Validators.minLength(5)]]
     });
 
     this.isEdit$ = this.form.get('id').valueChanges.pipe(
@@ -49,6 +50,13 @@ export class PoiComponent implements OnInit {
         this.pois = res;
         this.cdr.detectChanges();
     })
+  }
+
+  formatLabel(value: number | null) {
+    if (!value) {
+      return 0;
+    }
+    return value + 'm';
   }
 
   remove(poi: Poi) {
